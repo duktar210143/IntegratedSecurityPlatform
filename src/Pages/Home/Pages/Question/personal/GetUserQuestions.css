@@ -1,0 +1,157 @@
+/* Updated GetUserQuestions.css */
+
+.question-list {
+  list-style: none;
+  padding: 0;
+}
+
+.question-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.question-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.question-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.heart-button::before {
+  content: "";
+  height: 16px; /* Adjust the height of the line as needed */
+  width: 1px;
+  background-color: #555; /* Color of the line */
+  margin-right: 4px; /* Adjust the margin to control spacing */
+}
+
+.heart-button,
+.edit-button,
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+  transition: color 0.3s ease-in-out;
+}
+
+.vertical-line {
+  height: 120px; /* Adjust the height of the line as needed */
+  width: 2px;
+  background-color: #555; /* Color of the line */
+  margin: 0 8px; /* Adjust the margin to control spacing */
+  opacity: 0.5;
+}
+
+.heart-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  color: #1a73e8;
+}
+
+
+
+.no-questions-found {
+  text-align: center;
+  margin-top: 20px;
+  color: #555;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.question-description {
+  margin-bottom: 8px;
+  background-color: #f5f5f5; /* Light grey background for description */
+  padding: 8px;
+}
+
+.question-category {
+  background-color: lightblue;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  color: #555;
+  margin-top: 8px;
+  margin-left: auto; /* Move to the right end */
+}
+
+.tag-icon {
+  margin-left: 4px; /* Adjust margin to separate icon from text */
+  font-size: 14px; /* Adjust font size for better appearance */
+  color: #1565c0; /* Dark blue color for the tag icon */
+  content: "\2022"; /* Unicode for square */
+}
+.question-image {
+  max-width: 30%;
+  height: auto;
+  margin-top: 16px;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* Center the image */
+}
+
+.question-text {
+  font-weight: bold; /* Make the question text bolder */
+}
+
+
+.custom-toast {
+  font-size: 16px;
+}
+
+.custom-toast button {
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.custom-toast button.yes {
+  background-color: red;
+  color: white;
+}
+
+.custom-toast button.no {
+  background-color: blue;
+  color: white;
+}

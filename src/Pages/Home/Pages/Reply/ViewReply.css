@@ -1,0 +1,194 @@
+/* ViewReply.css */
+
+.view-full-screen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.view-modal-content {
+  background: #fff;
+  padding: 30px; /* Reduce padding for a smaller size */
+  border-radius: 12px; /* Slightly increase border-radius for a smoother look */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  max-width: 50%; /* Reduce max-width for a smaller size */
+  width: auto;
+  overflow: auto; /* Allow scrolling for the content */
+}
+
+.view-modal-title {
+  font-size: 24px; /* Decrease font size for a smaller title */
+  margin-bottom: 20px; /* Reduce margin for a smaller space between title and content */
+  color: #333;
+}
+
+.view-modal-label {
+  display: block;
+  margin-bottom: 10px; /* Reduce margin for a smaller space between label and input */
+  color: #555;
+  font-size: 18px; /* Decrease font size for smaller labels */
+}
+
+.view-modal-textarea,
+.view-modal-input {
+  height: 100px; /* Decrease height for smaller input fields */
+  width: 100%;
+  padding: 10px; /* Reduce padding for smaller input fields */
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px; /* Reduce margin for smaller space between inputs */
+}
+
+.view-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.view-submit-button,
+.view-close-button {
+  width: 100px; /* Reduce width for smaller buttons */
+  padding: 10px 20px; /* Reduce padding for smaller buttons */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #e38484;
+  color: #fff;
+  font-size: 16px; /* Decrease font size for smaller buttons */
+}
+
+.view-submit-button:hover {
+  background-color: #005bac;
+}
+
+.view-close-button:hover {
+  background-color: #dc3545;
+}
+
+.view-preview-image {
+  display: block;
+  margin: 0 auto;
+  width: 80%; /* Reduce width for smaller preview images */
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Reduce margin for smaller space between image and text */
+}
+
+.view-loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px; /* Reduce width for smaller loader */
+  height: 40px; /* Reduce height for smaller loader */
+  animation: spin 1s linear infinite;
+}
+
+/* Additional styles for replies */
+.question-and-replies-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.original-question-details,
+.replies-container {
+  width: 48%;
+}
+
+.reply-item {
+  margin-bottom: 10px; /* Reduce margin for smaller space between reply items */
+  padding: 10px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  overflow: hidden; /* Hide overflow to prevent expanding beyond container */
+}
+
+.reply-item p {
+  margin: 0;
+  color: #333;
+  font-size: 18px; /* Decrease font size for smaller text */
+}
+
+.reply-username {
+  display: block;
+  font-size: 20px; /* Increase font size for better visibility */
+  font-weight: bold;
+  color: #072e4f;
+  margin-bottom: 8px; /* Reduce margin for smaller space between username and reply text */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .view-modal-content {
+    max-width: 100%;
+  }
+
+  .original-question-details,
+  .replies-container {
+    width: 100%;
+  }
+}
+
+/* ViewReply.css */
+
+/* ... (previous styles) */
+
+/* Make replies container scrollable when there are more than 6 replies */
+.scrollable-replies {
+  overflow: hidden;
+}
+
+.scrollable-replies .replies-container {
+  overflow-y: auto;
+  max-height: 400px; /* Adjust the max-height as needed */
+}
+
+/* Add scrollbar styles for better visibility */
+.scrollable-replies .replies-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-replies .replies-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.scrollable-replies .replies-container::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .scrollable-replies .replies-container {
+    max-height: none; /* Remove max-height for small screens */
+  }
+}
+
+.reply-title{
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.reply-content{
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.horizontal-line {
+  border-top: 1px solid #000; /* Adjust color and thickness as needed */
+}

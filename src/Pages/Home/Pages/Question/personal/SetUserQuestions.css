@@ -1,0 +1,123 @@
+.full-screen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.close-button {
+  background-color: rgb(149, 51, 51);
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.close-button:hover {
+  background-color: rgb(180, 60, 60);
+}
+
+.submit-button {
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #005bac;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.larger-form {
+  width: 80%;
+  max-width: 600px;
+}
+
+.larger-text {
+  font-size: 15px; /* Increase text size for textarea */
+  height: 150px; /* Increase the height of the textarea */
+}
+
+.larger-select {
+  font-size: 18px;
+  padding: 12px;
+}
+
+.larger-button {
+  padding: 14px 20px;
+  font-size: 18px;
+}
+
+.preview-image {
+  max-width: 50%;
+  height: auto;
+  margin-top: 12px;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.submit-button,
+.close-button {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
