@@ -6,9 +6,10 @@ const User = new mongoose.Schema(
     lastname: { type: String },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // confirmPassword:{type:String,},
     email: { type: String },
     image: { type: String },
+    previousPasswords: [{ type: String }],
+    passwordCreated: { type: Date, default: Date.now }
   },
   { collection: "user-data" }
 );
