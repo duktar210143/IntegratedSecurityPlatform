@@ -1,6 +1,7 @@
 const webpack = require('webpack');
- 
-module.exports = function override(config,env){
+
+module.exports = function override(config, env) {
+    config.devtool = false; // Disable source maps in production
     config.resolve.fallback = {
         util: require.resolve('util/'),
         url: require.resolve('url'),
@@ -11,10 +12,10 @@ module.exports = function override(config,env){
     };
     config.plugins.push(
         new webpack.ProvidePlugin({
-            process:"process/browser",
-            buffer:['buffer','Buffer'],
+            process: "process/browser",
+            buffer: ['buffer', 'Buffer'],
         }),
     );
- 
+
     return config;
 }

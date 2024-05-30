@@ -23,7 +23,7 @@ const ResetPasswordForm = () => {
     setEmail("");
   };
 
-  return (
+  return ( 
     <>
       <AppBar />
       <div className="reset-password-form-container">

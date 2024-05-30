@@ -21,3 +21,5 @@ export const getReplies = (questionId, headers) =>
 export const deleteQuestion = (questionId, headers) =>
   Api.delete(`api/questions/deleteQuestion/${questionId}`, { headers });
 export const forgotPassword = (data) => Api.post("/api/user/forgot_password", data);
+
+export default Api;

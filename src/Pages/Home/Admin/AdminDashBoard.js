@@ -1,15 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { deleteQuestion, fetchAllQuestions } from "../../../Api/Api";
+import Api, { deleteQuestion, fetchAllQuestions } from "../../../Api/Api";
 import { RecentAddedQuestion } from "../Providers/LatestQuestionContext";
-import { Link } from "react-router-dom";
 import "./AdminDashBoard.css";
 
 const AdminDashBoard = () => {
   const navigate = useNavigate();
   const { question, setQuestion } = RecentAddedQuestion();
   const [isLoading, setIsLoading] = useState(true);
+  const [showUserActivity, setShowUserActivity] = useState(false);
+  const [userActivityLogs, setUserActivityLogs] = useState([]);
 
   const memoizedQuestions = useMemo(() => question, [question]);
 
@@ -87,18 +88,18 @@ const AdminDashBoard = () => {
         console.log("Token not found ");
         return;
       }
-  
+
       const headers = {
         "x-access-token": token,
       };
-  
+
       const { data } = await deleteQuestion(questionId, headers);
-  
+
       if (data.success === true) {
         setQuestion((prevQuestions) =>
           prevQuestions.filter((question) => question._id !== questionId)
         );
-  
+
         toast.success(data.message);
       } else {
         toast.error(data.message);
@@ -107,80 +108,71 @@ const AdminDashBoard = () => {
       console.error("Error during deleting the question:", e);
     }
   }
-  
+
+  async function fetchUserActivityLogs() {
+    try {
+      // Fetch user activity logs from the server
+      const { data } = await Api.get("/admin/user-activity-logs");
+      console.log(data);
+      if (data.success) {
+        setUserActivityLogs(data.logs);
+        setShowUserActivity(true);
+      } else {
+        throw new Error(data.message || "Failed to fetch user activity logs.");
+      }
+    } catch (error) {
+      console.error("Error fetching user activity logs:", error.message || error);
+      toast.error("An error occurred while fetching user activity logs.");
+    }
+  }
 
   return (
     <div className="admin-dashboard-container">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <table className="table">
-          <thead className="table-dark">
-            <tr>
-              <th>User</th>
-              <th>Question</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {question && question.length > 0 ? (
-              question.map((addedQuestion) => (
-                <tr key={addedQuestion._id}>
-                  <td>
-                    <div
-                      className="admin-user-profile"
-                      onClick={() => handleClickUser(addedQuestion.user._id)}
-                    >
-                      <img
-                        src={addedQuestion.user.image}
-                        alt={addedQuestion.user.firstname}
-                        className="user-profile-image"
-                      />
-                      <span>{addedQuestion.user.firstname}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="admin-question-content">
-                      <div>
-                        <h4>{addedQuestion.question}</h4>
-                        <p>{addedQuestion.questionDescription}</p>
-                      </div>
-                      <div className="admin-question-category">
-                        <span>&#128278;</span>
-                        {addedQuestion.questionCategory}
-                      </div>
-                      {addedQuestion.questionImageUrl && (
-                        <img
-                          src={addedQuestion.questionImageUrl}
-                          alt={addedQuestion.question}
-                          className="admin-question-image"
-                        />
-                      )}
-                    </div>
-                  </td>
+        <div>
+          <button onClick={fetchUserActivityLogs}>See User Activity</button>
+          {showUserActivity && (
+            <div>
+              <h2>User Activity Logs</h2>
+              <div className="user-activity-logs">
+                {userActivityLogs.map((log) => {
+                  const timestamp = new Date(log.timestamp).toLocaleString();
+                  const username = log.message.match(/Username: (.+?)\n/)?.[1];
+                  const sessionId = log.message.match(/Session ID: (.+?)\n/)?.[1];
+                  const url = log.message.match(/URL: (.+?)\n/)?.[1];
+                  const method = log.message.match(/Method: (.+?)$/)?.[1];
 
-                  <td>
-                    <div className="btn-group" role="group">
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(addedQuestion._id)}
-                        className="admin-delete-button"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="3">
-                  No questions found. Ask a question to get started!
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                  return (
+                    username &&
+                    sessionId &&
+                    url &&
+                    method && (
+                      <div key={log._id} className="user-activity-log">
+                        <p>
+                          <strong>Timestamp:</strong> {timestamp}
+                        </p>
+                        <p>
+                          <strong>Username:</strong> {username}
+                        </p>
+                        <p>
+                          <strong>Session ID:</strong> {sessionId}
+                        </p>
+                        <p>
+                          <strong>URL:</strong> {url}
+                        </p>
+                        <p>
+                          <strong>Method:</strong> {method}
+                        </p>
+                      </div>
+                    )
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
