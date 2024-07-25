@@ -5,7 +5,6 @@ const checkPasswordStrength = (password) => {
   const minLength = 8;
   const maxLength = 16;
   const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
   const hasSpecialChar = /[@$!%*?&#^]/.test(password);
   const isValidLength = password.length >= minLength && password.length <= maxLength;
@@ -15,9 +14,6 @@ const checkPasswordStrength = (password) => {
   }
   if (!hasUpperCase) {
     return { success: false, message: "Password must include at least one uppercase letter." };
-  }
-  if (!hasLowerCase) {
-    return { success: false, message: "Password must include at least one lowercase letter." };
   }
   if (!hasNumber) {
     return { success: false, message: "Password must include at least one number." };

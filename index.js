@@ -1,5 +1,3 @@
-
-// module.exports = app;
 const express = require("express");
 const dotenv = require("dotenv");
 const databaseConnection = require("./database/db");
@@ -13,18 +11,21 @@ const https = require('https');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const socketIo = require("socket.io");
-const{ createlogger, transport, format} = require("winston")
-require("winston-mongodb")
+const requestLogger = require("./middleware/logger.middleware");
+const cookieParser = require('cookie-parser');
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 
+// Use cookie-parser middleware
+app.use(cookieParser());
+
 // CORS configuration
 const corsPolicy = {
   origin: ["https://localhost:3000"],
-  methods:["GET","POST","PUT","DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -38,9 +39,9 @@ const httpsOptions = {
 
 // Cloudinary configuration
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
+  cloud_name: process.env.Cloud_Name,
   api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
+  api_secret: process.env.Api_Secret,
 });
 
 // Database connection
@@ -68,11 +69,15 @@ app.use(session({
   }),
   cookie: {
     secure: true,
-    maxAge: 30000 * 60 * 60 * 24, // 30 days
-    httpOnly: false,
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    httpOnly: true,
     sameSite: 'lax'
   }
 }));
+
+// Use the request logger middleware (before routes)
+app.use(requestLogger);
+
 
 // Routes
 app.use("/api", require("./Routes/signUpRoute"));
@@ -80,6 +85,7 @@ app.use("/api", require("./Routes/LoginRoute"));
 app.use("/api/user/", require("./Routes/ForgetPasswordRoute")); // Ensure this is correct
 app.use("/api/profile", require("./Routes/ProfileRoutes"));
 app.use("/api/questions", require("./Routes/QuestionsRoute"));
+app.use("/admin", require("./Routes/AdminRoute"));
 
 // New route for the test case
 app.get("/test", (req, res) => {
@@ -89,6 +95,8 @@ app.get("/test", (req, res) => {
 // HTTPS server
 const port = process.env.PORT || 5500;
 const server = https.createServer(httpsOptions, app);
+
+
 
 server.listen(port, () => {
   console.log(`Development Server is running on port ${port}`);
@@ -127,7 +135,5 @@ io.on("connection", (socket) => {
     });
   });
 });
-
-
 
 module.exports = app;
