@@ -8,10 +8,10 @@ import "./SetUserQuestions.css";
 
 const SetUserQuestions = ({ isOpen, onClose }) => {
   const [newQuestion, setNewQuestion] = useState("");
-  const [questionCategory, setQuestionCategory] = useState("");
   const [questionDescription, setQuestionDescription] = useState("");
   const [questionImage, setQuestionImage] = useState(null);
   const [previewImage, setPreviewImage] = useState("");
+  const [postImage, setPostImage] = useState(null);
   const [loading, setLoading] = useState(false); // Added loading state
 
   const { question, setQuestion } = RecentAddedQuestion();
@@ -21,9 +21,6 @@ const SetUserQuestions = ({ isOpen, onClose }) => {
     setNewQuestion(event.target.value);
   };
 
-  const handleCategoryChange = (event) => {
-    setQuestionCategory(event.target.value);
-  };
 
   const handleDescriptionChange = (event) => {
     setQuestionDescription(event.target.value);
@@ -57,7 +54,6 @@ const SetUserQuestions = ({ isOpen, onClose }) => {
 
       const formData = new FormData();
       formData.append("question", newQuestion);
-      formData.append("questionCategory", questionCategory);
       formData.append("questionDescription", questionDescription);
       formData.append("questionImage", questionImage);
 
@@ -74,7 +70,6 @@ const SetUserQuestions = ({ isOpen, onClose }) => {
 
         setQuestion(fetchedData);
         setNewQuestion("");
-        setQuestionCategory("");
         setQuestionDescription("");
         setQuestionImage(null);
         setPreviewImage("");
@@ -92,34 +87,26 @@ const SetUserQuestions = ({ isOpen, onClose }) => {
     isOpen && (
       <div className="full-screen-modal">
         <div className="modal-content larger-form">
+        <label className="custom-file-upload">
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+            {postImage ? "Change Image" : "Select Post Image"}
+          </label>
+          {previewImage && (
+            <img className="preview-image" src={previewImage} alt="Preview" />
+          )}
           <textarea
             placeholder="Ask your question..."
             value={newQuestion}
             onChange={handleQuestionChange}
             className="larger-text"
           />
-          <select
-            onChange={(e) => setQuestionCategory(e.target.value)}
-            value={questionCategory}
-            className="form-control larger-select"
-          >
-            <option value="" disabled>
-              Select Category
-            </option>
-            <option value="Ethical">Ethical</option>
-            <option value="Computing">Computing</option>
-            <option value="Data Science">Data Science</option>
-          </select>
           <textarea
             placeholder="Description"
             value={questionDescription}
             onChange={handleDescriptionChange}
             className="larger-text"
           />
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          {previewImage && (
-            <img className="preview-image" src={previewImage} alt="Preview" />
-          )}
+          
           <div className="button-container">
             {loading ? (
               <div className="loading-spinner">
