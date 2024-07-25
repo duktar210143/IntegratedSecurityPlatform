@@ -1,0 +1,50 @@
+/* Profile Image Styling */
+.profile-container {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease; /* Add a transform transition effect */
+}
+
+.profileimg{
+  height: 15%;
+  width: 27%;
+  margin-top: 20px;
+  display: block;
+  border-radius: 8%;
+  object-fit: cover;
+  margin-left: 70px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease; /* Add transition for transform and box-shadow */
+}
+
+.profileimg img{
+  height: 30%;
+  width: 40%;
+}
+
+.profile-container h3 {
+  font-family: 'Georgia', 'Times New Roman', serif; 
+  color: #333333;
+  margin-left: 30px;
+  font-weight: 50;
+  font-size: 18px; /* Increase font size for the name */
+  transition: color 0.3s ease; /* Add transition for text color */
+}
+
+/* Hover effects */
+.profile-container:hover {
+  transform: scale(1.02); /* Slightly scale up on hover for a more subtle effect */
+}
+
+.profile-container h3:hover {
+  color: #E8E9ED; /* Change text color on hover to a fun color */
+}
+
+.userName{
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    display: block;
+  }
+}
