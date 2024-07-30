@@ -197,8 +197,11 @@ const loginUser = async (req, res) => {
         req.session.lastLoginAttempt = currentTime;
 
         try {
-          const token = jwt.sign({ username: user.username }, process.env.JWT_TOKEN_SECRET);
-          req.session.user = { username };
+          const token = jwt.sign(
+            { username: user.username, role: user.role },
+            process.env.JWT_TOKEN_SECRET
+          );
+          req.session.user = { username, role: user.role };
 
           return res.json({
             success: true,

@@ -13,6 +13,7 @@ const MongoStore = require('connect-mongo');
 const socketIo = require("socket.io");
 const requestLogger = require("./middleware/logger.middleware");
 const cookieParser = require('cookie-parser');
+const { verifyUser, verifyAdmin } = require("./middleware/verify.user");
 
 // Load environment variables
 dotenv.config();
@@ -82,10 +83,10 @@ app.use(requestLogger);
 // Routes
 app.use("/api", require("./Routes/signUpRoute"));
 app.use("/api", require("./Routes/LoginRoute"));
-app.use("/api/user/", require("./Routes/ForgetPasswordRoute")); // Ensure this is correct
+app.use("/api/user/", require("./Routes/ForgetPasswordRoute"));
 app.use("/api/profile", require("./Routes/ProfileRoutes"));
 app.use("/api/questions", require("./Routes/QuestionsRoute"));
-app.use("/admin", require("./Routes/AdminRoute"));
+app.use("/admin", verifyAdmin, verifyUser, require("./routes/AdminRoute")); // Protect admin routes
 
 // New route for the test case
 app.get("/test", (req, res) => {
@@ -99,7 +100,7 @@ const server = https.createServer(httpsOptions, app);
 
 
 server.listen(port, () => {
-  console.log(`Development Server is running on port ${port}`);
+  // console.log(`Development Server is running on port ${port}`);
 });
 
 // Socket.io setup
@@ -114,23 +115,23 @@ const io = socketIo(server, {
 io.on("connection", (socket) => {
   let userId;
 
-  console.log("connected to socket.io");
+  // console.log("connected to socket.io");
 
   socket.on("setup", (userData) => {
     userId = userData._id;
     socket.broadcast.emit("userId", userId);
-    console.log(userData._id + " from socket");
+    // console.log(userData._id + " from socket");
     socket.emit("connected");
   });
 
   socket.on("new reply", (replyData) => {
-    console.log(replyData);
+    // console.log(replyData);
     const { users, reply } = replyData;
     users.forEach((user) => {
-      console.log("outside if" + user._id);
+      // console.log("outside if" + user._id);
       if (userId !== user._id) {
         socket.emit("new reply", replyData); // Emits to all users except the current socket (logged-in user)
-        console.log("inside if" + user._id);
+        // console.log("inside if" + user._id);
       }
     });
   });

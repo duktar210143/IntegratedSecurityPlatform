@@ -27,7 +27,7 @@ const ForgotPasswordController = async (req, res) => {
         pass: "fvyb vyon ykak qlgh",
       },
     });
-    console.log(link);
+    // console.log(link);
 
     const mailOptions = {
       from: "duktar13@gmail.com",
@@ -40,7 +40,7 @@ const ForgotPasswordController = async (req, res) => {
       if (error) {
         return console.log(error);
       }
-      console.log("Email sent", info.response);
+      // console.log("Email sent", info.response);
     });
   } catch (error) {
     console.error(error);

@@ -18,11 +18,11 @@ const getUserQuestion = async (req, res) => {
 
     // Get the email from the decoded token
     const userId = decoded.userId;
-    console.log(userId);
+    // console.log(userId);
     // Find the logged-in user
     const user = await User.findOne({ userId });
     if (!user) {
-      console.log("user not found");
+      // console.log("user not found");
       return res.json({
         success: false,
         message: "authentication error",
@@ -46,11 +46,11 @@ const getUserQuestion = async (req, res) => {
         question: singleQuestion,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.status(500).json("Server Error");
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json("Server Error");
   }
 };
@@ -107,11 +107,11 @@ const updateUserQuestion = async (req, res) => {
         question: updatedQuestion,
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return res.status(500).json({ success: false, message: "Server error" });
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
