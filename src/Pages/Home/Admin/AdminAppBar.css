@@ -1,0 +1,26 @@
+.admin-app-bar {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(175, 90, 90);
+    color: white;
+}
+
+.admin-title {
+    flex-grow: 0.9;
+    font-size: 23px;
+    font-family: 'Lobster', cursive;
+}
+
+.admin-user {
+    display: flex;
+    align-items: center;
+}
+
+.admin-user span {
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}

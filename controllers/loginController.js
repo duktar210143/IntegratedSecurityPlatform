@@ -202,7 +202,6 @@ const loginUser = async (req, res) => {
             process.env.JWT_TOKEN_SECRET
           );
           req.session.user = { username, role: user.role };
-
           return res.json({
             success: true,
             message: "Logged in successfully",

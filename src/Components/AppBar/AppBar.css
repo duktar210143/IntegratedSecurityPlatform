@@ -1,0 +1,228 @@
+/* AppBar styling */
+.AppBar {
+  width: 100%;
+  height: 55px;
+  /* Reduced height */
+  background-color: #F5F5F5;
+  /* Change the color to match your design */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.AppBar label {
+  color: white;
+  font-size: 20px;
+  /* Reduced font size */
+  font-weight: bold;
+}
+
+
+
+/* Search input and icon */
+.circleIcon-container {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  margin-left: auto;
+  padding: 5px;
+  height: 20px;
+  margin-right: 50px;
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.circleIcon-container:hover {
+  opacity: 0.4;
+  transform: scale(1.4);
+}
+
+
+/* Right container for icons */
+.right-container {
+  position: relative;
+  margin-top: 5px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.right-container-button {
+  position: relative;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+}
+
+/* App bar items/icons */
+.appbar-items:not(.replies-menu .appbar-items) {
+  height: 30px;
+  padding: 10px;
+  color: white;
+  font-size: 20px;
+  /* Reduced font size */
+  cursor: pointer;
+}
+
+/* App bar items/icons */
+.appbar-items:not(.replies-menu .appbar-items):not(.replies-menu):hover {
+  opacity: 0.4;
+  /* Set the opacity for the hover effect */
+}
+
+
+.AppBar .appbar-items:nth-child(3) {
+  margin-bottom: 5px;
+  margin-left: 2px;
+}
+
+
+@media (max-width: 768px) {
+  .input-container {
+    display: none;
+  }
+}
+
+
+
+.button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* Optional: Change cursor on hover */
+  margin: 0;
+}
+
+.penSquare-icon {
+  color: black;
+  margin-top: -3px;
+  /* Adjust the margin-top to move the icon up */
+  transition: all 0.2s ease;
+  /* Add a smooth transition for all properties */
+  display: inline-block;
+  /* Ensure the icon takes up space for the transition */
+  transform: scale(1);
+  /* Initial size */
+}
+
+.penSquare-icon:hover {
+  opacity: 0.4;
+  transform: scale(1.4);
+  /* Increase size on hover */
+}
+
+
+
+.logoName {
+  font-family: 'Lobster', cursive;
+  /* Use 'Lobster' or the font you prefer */
+  color: #537a8d;
+  /* Vintage brownish color */
+  font-size: 23px;
+  /* Adjust font size as needed */
+  font-weight: bold;
+}
+
+.reply-notify-items {
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  padding-right: 20px;
+}
+
+.reply-text {
+  margin-left: 10px;
+  color: black;
+  font-size: 10px;
+
+}
+
+.reply-text-static {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: red;
+  font-size: 10px;
+
+}
+
+.question-describe-controller {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+
+.reply-user-name {
+  color: black;
+  font-size: 10px;
+  margin-left: 25px;
+  font-weight: bold;
+  padding-bottom: 20px
+}
+
+
+
+.replies-menu {
+  padding: 50px;
+  position: absolute;
+  top: calc(100% + 4px);
+  margin-left: 40px;
+  color: #f5f5f5;
+  /* Text color */
+  font-size: 10px;
+  /* Font size */
+  border: 1px solid #c50e0e;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 15px;
+  z-index: 1000;
+  opacity: 1;
+  background-color: #fffcfc;
+}
+
+/* .replies-menu div:hover {
+  background-color: #f5f5f5;
+  color: black;
+  opacity: 1;
+} */
+
+.user-image-circle {
+  height: 80px;
+  /* Set the width and height to your desired size */
+  height: 100px;
+  border-radius: 50%;
+  /* Use 50% to create a circular shape */
+  overflow: hidden;
+}
+
+.user-image-circle img {
+  height: 100%;
+  /* Make the image fill the circle */
+  width: 100%;
+  /* Make the image fill the circle */
+}
+
+.clear-notify-button {
+  background-color: #f44336;
+  /* Red color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-notify-button:hover {
+  background-color: #d32f2f;
+  /* Darker red color on hover */
+}

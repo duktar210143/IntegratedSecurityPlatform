@@ -1,0 +1,39 @@
+.Edit-btn {
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left: 60px;
+    background-color: #52796F; /* Set the background color */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove the button border */
+    border-radius: 5px; /* Add a slight border radius for a rounded look */
+    padding: 10px 20px; /* Add padding to increase button size */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 10%;
+  }
+  
+  .Edit-btn:hover {
+    background-color: #E8E9ED; /* Change background color on hover */
+    transform: scale(1.05); /* Add a slight scale-up effect on hover */
+  }
+  
+  /* Add this to your CSS */
+/* Style for the file input */
+.custom-file-input {
+    display: none; /* Hide the default file input */
+  }
+  
+  .file-upload-label {
+    font-weight: 700;
+    margin-left: 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a transition effect for hover */
+  }
+  
+
+  .file-upload-container{
+    margin-top: 15px;
+  }
+  
