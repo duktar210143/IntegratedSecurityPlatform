@@ -14,6 +14,9 @@ const socketIo = require("socket.io");
 const requestLogger = require("./middleware/logger.middleware");
 const cookieParser = require('cookie-parser');
 const { verifyUser, verifyAdmin } = require("./middleware/verify.user");
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const csrf = require('csurf');
 
 // Load environment variables
 dotenv.config();
@@ -50,10 +53,10 @@ databaseConnection();
 
 // Middleware setup
 app.use(multiparty());
-app.use(express.json());
+app.use(express.json({ limit: '10kb' })); // Limit JSON payload size
+app.use(express.urlencoded({ extended: true, limit: '10kb' })); // Limit URL-encoded payload size
 app.use("/uploads", express.static("uploads"));
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -75,6 +78,18 @@ app.use(session({
     sameSite: 'lax'
   }
 }));
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+// CSRF token middleware
+app.use(function (req, res, next) {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 // Use the request logger middleware (before routes)
 app.use(requestLogger);
